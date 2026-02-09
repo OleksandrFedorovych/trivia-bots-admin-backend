@@ -224,6 +224,32 @@ router.put('/:id', async (req, res, next) => {
  * :id can be UUID or session_id (e.g. session-1770421050714)
  * Body: player_id (UUID) or nickname for lookup, questions_answered, correct_answers, final_score, final_rank
  */
+router.post('/:id/results', async (req, res, next) => {
+  try {
+    const { player_id, questions_answered, correct_answers, final_score, final_rank, status, error_message } = req.body;
+
+    if (!player_id) {
+      return res.status(400).json({ error: 'player_id is required' });
+    }
+
+    const accuracy = questions_answered > 0 
+      ? (correct_answers / questions_answered) * 100 
+      : null;
+
+    const result = await query(
+      `INSERT INTO player_results (
+        session_id, player_id, questions_answered, correct_answers,
+        accuracy, final_score, final_rank, status, error_message
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      RETURNING *`,
+      [req.params.id, player_id, questions_answered || 0, correct_answers || 0, accuracy, final_score, final_rank, status || 'completed', error_message]
+    );
+
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default router;
 
