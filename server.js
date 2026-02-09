@@ -27,10 +27,12 @@ app.get('/api/health', (req, res) => {
 // Routes
 import playersRoutes from './routes/players.js';
 import sessionsRoutes from './routes/sessions.js';
+import playerResultsRoutes from './routes/playerResults.js';
 import leaguesRoutes from './routes/leagues.js';
 import gptRoutes from './routes/gpt.js';
 
 app.use('/api/players', playersRoutes);
+app.use('/api/player-results', playerResultsRoutes);
 app.use('/api/sessions', sessionsRoutes);
 app.use('/api/leagues', leaguesRoutes);
 app.use('/api/gpt', gptRoutes);

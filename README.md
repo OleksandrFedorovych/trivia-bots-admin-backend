@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+# trivia-bots-admin-backend
+
 # Trivia Bots Admin Backend
 
 Express.js API server for the Trivia Bots Admin Dashboard.
@@ -74,6 +75,3 @@ admin/backend/
 - **xlsx**: Excel file processing
 - **cors**: CORS middleware
 - **dotenv**: Environment variable management
-=======
-# trivia-bots-admin-backend
->>>>>>> 435d5fc8d09db4e80f9e911ad9a40e68ab38b889

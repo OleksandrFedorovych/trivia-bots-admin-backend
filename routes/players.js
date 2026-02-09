@@ -5,10 +5,10 @@
 
 import express from 'express';
 import { query } from '../db/index.js';
-import { excelLoader } from '../src/players/excelLoader.js';
+import { excelLoader } from '../../../src/players/excelLoader.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import config from '../src/config/default.js';
+import config from '../../../src/config/default.js';
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
