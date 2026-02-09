@@ -5,7 +5,7 @@
 
 import express from 'express';
 import { query } from '../db/index.js';
-import { excelLoader } from '../../../src/players/excelLoader.js';
+import { excelLoader } from '../src/players/excelLoader.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import config from '../../../src/config/default.js';

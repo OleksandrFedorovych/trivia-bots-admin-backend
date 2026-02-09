@@ -184,8 +184,10 @@ export class ExcelLoader {
       }
     }
 
-    // Generate nickname from name
-    const nickname = name.split(' ')[0] + (Math.floor(Math.random() * 99) + 1);
+    // Generate deterministic nickname (same id/name = same nickname for sync consistency)
+    const hash = String(finalId).split('').reduce((a, c) => ((a << 5) - a) + c.charCodeAt(0), 0);
+    const suffix = Math.abs(hash % 90) + 10;
+    const nickname = (name.split(' ')[0] || 'Player') + suffix;
 
     // Determine personality based on accuracy
     let personality = 'normal';
@@ -195,10 +197,11 @@ export class ExcelLoader {
 
     return createProfile({
       id: String(finalId),
+      participantId: String(finalId),
       nickname,
       name: String(name),
       email: email ? String(email) : `${finalId}@tysn.game`,
-      phone: phone ? String(phone) : `+1415555${String(Math.floor(Math.random() * 9000) + 1000)}`,
+      phone: phone ? String(phone) : `+1415555${Math.abs(hash % 9000) + 1000}`,
       accuracy: Math.min(0.95, Math.max(0.5, accuracy)), // Clamp between 50-95%
       personality,
       team: team ? String(team) : null,
@@ -335,4 +338,3 @@ export class ExcelLoader {
 export const excelLoader = new ExcelLoader();
 
 export default excelLoader;
-
