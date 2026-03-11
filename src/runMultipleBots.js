@@ -14,6 +14,7 @@ import { GameSession } from './orchestrator/gameSession.js';
 import { excelLoader } from './players/excelLoader.js';
 import logger from './utils/logger.js';
 import config from './config/default.js';
+import { playerResultsAPI, sessionsAPI } from './adminApiClient.js';
 
 // Configuration
 const DEFAULT_BOT_COUNT = 5;
